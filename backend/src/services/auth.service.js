@@ -6,13 +6,31 @@ const { getDatabase } = require("../db/database");
 const { env } = require("../config/env");
 const { HttpError } = require("../utils/http-error");
 
+function getFirebaseCredential() {
+  const missingKeys = [
+    ["FIREBASE_PROJECT_ID", env.firebaseProjectId],
+    ["FIREBASE_CLIENT_EMAIL", env.firebaseClientEmail],
+    ["FIREBASE_PRIVATE_KEY", env.firebasePrivateKey],
+  ]
+    .filter(([, value]) => !value)
+    .map(([key]) => key);
+
+  if (missingKeys.length) {
+    throw new Error(
+      `Missing Firebase environment variable(s): ${missingKeys.join(", ")}`
+    );
+  }
+
+  return admin.credential.cert({
+    projectId: env.firebaseProjectId,
+    clientEmail: env.firebaseClientEmail,
+    privateKey: env.firebasePrivateKey,
+  });
+}
+
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: env.firebaseProjectId,
-      clientEmail: env.firebaseClientEmail,
-      privateKey: env.firebasePrivateKey.replace(/\\n/g, "\n"),
-    }),
+    credential: getFirebaseCredential(),
   });
 }
 

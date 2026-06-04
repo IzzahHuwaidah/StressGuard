@@ -102,6 +102,44 @@ Data Science:
 - Eksplorasi fitur untuk model prediksi tingkat stres.
 - Referensi data untuk proses training dan evaluasi model.
 
+## Struktur dan Berkas Pendukung
+
+Project ini dipisahkan menjadi tiga service utama, yaitu frontend, backend, dan AI service. Setiap service memiliki berkas dependensi dan konfigurasi masing-masing agar proses setup, development, dan deployment lebih mudah dikelola.
+
+Berkas dependensi yang digunakan:
+
+- Frontend: `frontend/package.json` dan `frontend/package-lock.json`.
+- Backend: `backend/package.json` dan `backend/package-lock.json`.
+- AI service: `ai_engineer/requirements.txt`.
+
+Berkas konfigurasi pendukung:
+
+- Root: `.gitignore`.
+- Frontend: `frontend/vite.config.js`, `frontend/jsconfig.json`, `frontend/components.json`, `frontend/nginx.conf`, `frontend/Dockerfile`, `frontend/netlify.toml`, `frontend/vercel.json`, dan `frontend/railway.json`.
+- Backend: `backend/Dockerfile`, `backend/vitest.config.js`, `backend/render.yaml`, dan `backend/railway.json`.
+- AI service: `ai_engineer/Dockerfile`.
+
+Template environment disediakan agar konfigurasi lokal dapat dibuat tanpa menyimpan credential sensitif di repository:
+
+- Frontend: `frontend/.env.example`.
+- Backend: `backend/.env.example`.
+- AI service: `ai_engineer/.env.example`.
+
+File `.env` asli digunakan hanya untuk kebutuhan lokal atau deployment dan tidak dicommit ke Git.
+
+## Model Machine Learning
+
+Model Machine Learning yang digunakan pada AI service disimpan terpisah agar repository tetap ringan. Model dapat diunduh melalui folder Google Drive berikut:
+
+- [Folder model StressGuard](https://drive.google.com/drive/folders/1eZvkOW6DfYhESX-YCWf8hGTpDXpNkU7X?usp=sharing)
+
+File model yang digunakan oleh AI service berada di folder `ai_engineer/`:
+
+- `ai_engineer/best_model_gradient_tape.keras`
+- `ai_engineer/scaler.pkl`
+
+Kedua file tersebut dimuat oleh `ai_engineer/model_service.py` saat endpoint prediksi dijalankan.
+
 ## Data Science
 
 Folder `data_science/` berisi dataset yang digunakan sebagai bahan eksplorasi dan pengembangan model prediksi. Dataset ini menjadi dasar untuk memahami hubungan antara pola tidur, screen time, gaya hidup, kesehatan mental, dan indikator stres.
@@ -127,6 +165,14 @@ Peran folder `data_science/`:
 - Memisahkan data eksperimen dari kode aplikasi production agar struktur project tetap rapi.
 
 ## Environment Variable
+
+Salin template berikut sebelum menjalankan aplikasi:
+
+```bash
+cp frontend/.env.example frontend/.env
+cp backend/.env.example backend/.env
+cp ai_engineer/.env.example ai_engineer/.env
+```
 
 ### Frontend
 

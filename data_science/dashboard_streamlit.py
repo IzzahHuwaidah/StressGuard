@@ -461,7 +461,7 @@ with tab_predict:
     phone_sleep_in = p5.number_input("HP Sebelum Tidur (menit)", 0, 180, 45)
     caffeine_in    = p6.number_input("Asupan Kafein (cangkir)", 0, 10, 2)
 
-    if st.button("🔍 Prediksi Sekarang", type="primary"):
+    if st.button("🔍 Screening Sekarang", type="primary"):
         # Logika prediksi rule-based dari temuan EDA
         score = 0
 

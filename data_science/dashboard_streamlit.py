@@ -157,7 +157,7 @@ fdf = fdf[fdf["stress_category"].isin(stress_filter)]
 
 # ─── Tabs ─────────────────────────────────────────────────────────────────────
 tab_overview, tab_eda, tab_segment, tab_predict, tab_insights = st.tabs(
-    ["Ringkasan", "📈 EDA", "🎯 Segmentasi", "🤖 Prediksi", "💡 Insight & Rekomendasi"]
+    ["Ringkasan", "📈 EDA", "🎯 Segmentasi", "🤖 Screening", "💡 Insight & Rekomendasi"]
 )
 
 

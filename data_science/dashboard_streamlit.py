@@ -508,7 +508,7 @@ with tab_predict:
             emoji_pred = "🟢"
 
         st.markdown("---")
-        st.subheader("Hasil Prediksi")
+        st.subheader("Hasil Screening")
         r1, r2 = st.columns(2)
         r1.metric("Estimasi Skor Stres", f"{stress_score_pred:.1f} / 10")
         r2.markdown(
